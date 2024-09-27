@@ -4,7 +4,7 @@ import socket
 from datetime import datetime 
 
 PORT = 5050
-SERVER = "172.16.0.123"
+SERVER = "localhost"
 ADDR = (SERVER, PORT)
 FORMAT = "utf-8"
 DISCONNECT_MESSAGE = "!DISCONNECT"
