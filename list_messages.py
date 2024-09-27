@@ -1,8 +1,8 @@
+#list_messages.py
 import socket
-import time
 
 PORT = 5050
-SERVER = "localhost"
+SERVER = "172.16.0.123"
 ADDR = (SERVER, PORT)
 FORMAT = "utf-8"
 DISCONNECT_MESSAGE = "!DISCONNECT"
@@ -16,9 +16,18 @@ def connect():
 
 def start():
     connection = connect()
-    while True:
-        msg = connection.recv(1024).decode(FORMAT)
-        print(msg)
+    print("Connected to the server. Listening for messages...")
+    try:
+        while True:
+            msg = connection.recv(1024).decode(FORMAT)
+            if msg == DISCONNECT_MESSAGE:
+                print("Server has disconnected.")
+                break
+            print(msg)
+    except:
+        print("Connection closed or interrupted.")
+    finally:
+        connection.close()
 
 
 start()

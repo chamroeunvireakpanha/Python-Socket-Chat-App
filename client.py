@@ -2,7 +2,7 @@ import socket
 import time
 
 PORT = 5050
-SERVER = "localhost"
+SERVER = "172.16.0.123"
 ADDR = (SERVER, PORT)
 FORMAT = "utf-8"
 DISCONNECT_MESSAGE = "!DISCONNECT"
@@ -17,6 +17,9 @@ def connect():
 def send(client, msg):
     message = msg.encode(FORMAT)
     client.send(message)
+
+    ack = client.recv(1024).decode(FORMAT)
+    print(f"[SERVER] {ack}")
 
 
 def start():
